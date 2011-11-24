@@ -12,7 +12,7 @@ class GamenController < ApplicationController
       raise "bad request? params is nil."
     end
     @gamen = Gamen.new(para)
-    if not @gamen.save
+    if not @gamen.valid?
       render :action => "new" 
     end
     my_session = SessionMgr.new session
