@@ -1,6 +1,12 @@
 <h1>confirm</h1>
 
 <p>
+  <b>select:</b>
+  <%= @gamen.select_value %><br>
+  <%= my_label_from_hash Gamen.select_data, @gamen.select_value %>
+</p>
+
+<p>
   <b>Title:</b>
   <%= @gamen.title %>
 </p>

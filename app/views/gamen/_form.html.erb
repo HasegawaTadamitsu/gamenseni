@@ -11,8 +11,14 @@
     </div>
   <% end %>
 
+  <div class=field>
+   <%= my_select :gamen, :select_value,
+                 Gamen.select_data, @gamen.select_value %>
+
+  </div>
+
   <div class="field">
-    <%= f.label :title %><br />
+    <%= f.label :title %><%=hissu%> <br />
     <%= f.text_field :title %>
   </div>
   <div class="field">
