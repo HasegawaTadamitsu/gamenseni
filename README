@@ -1,4 +1,3 @@
-
 this is example 
 
  input > confirm > crate&redirect complete
@@ -9,7 +8,9 @@ validate
 session
 helper
  select
-
+ajax
+ page.replace
+ remote_function
 
 http://www.haselab.com/
 
@@ -18,3 +19,5 @@ I see this URL.(thank you...)
 http://guides.rubyonrails.org/
 http://railsdoc.com/references/select
 
+
+http://kiyorin-net.blogspot.com/2011/03/rails3-selectbox.html
