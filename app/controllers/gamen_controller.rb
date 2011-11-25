@@ -4,6 +4,7 @@ class GamenController < ApplicationController
 
   def new
     @gamen = Gamen.new
+    set_all_select_hash
   end
 
   def confirm
@@ -13,6 +14,7 @@ class GamenController < ApplicationController
     end
     @gamen = Gamen.new(para)
     if not @gamen.valid?
+      set_all_select_hash
       render :action => "new" 
     end
     my_session = SessionMgr.new session
@@ -24,6 +26,8 @@ class GamenController < ApplicationController
     my_session.valid?
     @gamen = my_session.get
     my_session.kill
+
+    set_all_select_hash
     render :action => "new"
   end
 
@@ -50,9 +54,37 @@ class GamenController < ApplicationController
     respond_with  @data
   end
 
+
+  def chg_select1
+    #todo
+    @select2_hash = { 1 => 'aaa',2 =>'bbb' }
+    @select3_hash = Hash.new
+    @select4_hash = Hash.new
+    render :chg_select
+  end
+
+  def chg_select2
+    #todo
+    @select3_hash = { 1 => 'cc',2 =>'d' }
+    @select4_hash = Hash.new
+    render :chg_select
+  end
+
+  def chg_select3
+    #todo
+    @select4_hash = { 1 => 'ed',2 =>'ff' }
+    render :chg_select
+  end
+
   private 
-
-
+  def set_all_select_hash
+    # todo
+    @select1_hash = { 1  => 'abc', 2 => 'def' }
+    @select2_hash = Hash.new
+    @select3_hash = Hash.new
+    @select4_hash = Hash.new
+  end
+  
 end
 class SessionMgr
   def initialize session

@@ -1,0 +1,33 @@
+if    @select2_hash
+  # select 1 ga kawatta tokiha select 2 wo kakikaeru
+  # dakara 2no hash ga aru.
+  page.replace_html "chg_select2",
+                     :partial => "chg_select2",
+                     :locals  => { :default_value => nil}
+
+  page.replace_html "chg_select2",
+                     :partial => "chg_select2",
+                     :locals  => { :default_value => nil}
+
+
+  page.visual_effect :highlight,"chg_select2"
+end
+if    @select3_hash
+   # select 2 ga kakikawattanode select 3 wo kakikaeru
+   page.replace_html "chg_select3" ,
+                     :partial => "chg_select3" ,
+                     :locals  => { :default_value => nil}
+   page.visual_effect :highlight,"chg_select3"
+end
+if @select4_hash
+   # select 3 ga kakikawattanode select 4 wo kakikaeru
+   page.replace_html "chg_select4" ,
+                     :partial => "chg_select4" ,
+                     :locals  => { :default_value => nil}
+   page.visual_effect :highlight,"chg_select4"
+end
+
+
+
+                     
+

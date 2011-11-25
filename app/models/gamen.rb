@@ -13,5 +13,9 @@ class Gamen < ActiveRecord::Base
   end
 
   attr_accessor :select_value
+  attr_accessor :select1_value
+  attr_accessor :select2_value
+  attr_accessor :select3_value
+  attr_accessor :select4_value
 
 end

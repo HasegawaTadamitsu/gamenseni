@@ -17,6 +17,18 @@
 
   </div>
 
+  <div class=field>
+   <%= render :partial => "chg_select1" ,
+               :locals => {:default_value => @gamen.select1_value} %>
+   <%= render :partial => "chg_select2" ,
+               :locals => {:default_value => @gamen.select2_value} %>
+   <%= render :partial => "chg_select3",
+               :locals => {:default_value => @gamen.select3_value} %>
+   <%= render :partial => "chg_select4",
+               :locals => {:default_value => @gamen.select4_value} %>
+  </div>
+
+
   <div class="field">
     <%= f.label :title %><%=hissu%> <br />
     <%= f.text_field :title %>
