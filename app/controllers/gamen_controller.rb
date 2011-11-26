@@ -14,7 +14,7 @@ class GamenController < ApplicationController
     end
     @gamen = Gamen.new(para)
     if not @gamen.valid?
-      set_all_select_hash
+      set_select_at_gamen_data @gamen
       render :action => "new" 
     end
     my_session = SessionMgr.new session
@@ -25,6 +25,7 @@ class GamenController < ApplicationController
     my_session = SessionMgr.new session
     my_session.valid?
     @gamen = my_session.get
+    set_select_at_gamen_data @gamen
     my_session.kill
 
     set_all_select_hash
@@ -57,26 +58,41 @@ class GamenController < ApplicationController
 
   def chg_select1
     #todo
-    @select2_hash = { 1 => 'aaa',2 =>'bbb' }
-    @select3_hash = Hash.new
-    @select4_hash = Hash.new
+    set_select_hash_from_select1 10 
     render :chg_select
   end
 
   def chg_select2
     #todo
-    @select3_hash = { 1 => 'cc',2 =>'d' }
-    @select4_hash = Hash.new
+    set_select_hash_from_select2 10, 20 
     render :chg_select
   end
 
   def chg_select3
     #todo
-    @select4_hash = { 1 => 'ed',2 =>'ff' }
+    set_select_hash_from_select3 10, 20, 30
     render :chg_select
   end
 
   private 
+  # todo move to model
+  def set_select_at_gamen_data arg
+    @select1_hash = { 1  => 'abc', 2 => 'def' }
+    
+    if arg.select1_value
+      set_select_hash_from_select1 arg.select1_value
+    end
+    if arg.select2_value
+      set_select_hash_from_select2 arg.select1_value,
+                                   arg.select2_value
+    end
+    if arg.select3_value
+      set_select_hash_from_select3 arg.select1_value,
+                                    arg.select2_value,
+                                    arg.select3_value
+    end
+  end
+
   def set_all_select_hash
     # todo
     @select1_hash = { 1  => 'abc', 2 => 'def' }
@@ -85,6 +101,24 @@ class GamenController < ApplicationController
     @select4_hash = Hash.new
   end
   
+  def set_select_hash_from_select1 selecet1_value
+    # todo
+    @select2_hash = { 1 => 'aaa',2 =>'bbb' }
+    @select3_hash = Hash.new
+    @select4_hash = Hash.new
+  end
+
+  def set_select_hash_from_select2 selecet1_value,select2_value
+    # todo
+    @select3_hash = { 1 => 'cc',2 =>'d' }
+    @select4_hash = Hash.new
+  end
+
+  def set_select_hash_from_select3 selecet1_value,select2_value,select3_value
+    # todo
+    @select4_hash = { 2 =>"aa", 3=>"bb"}
+  end
+
 end
 class SessionMgr
   def initialize session

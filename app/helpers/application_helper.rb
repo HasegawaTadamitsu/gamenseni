@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 module ApplicationHelper
   def hissu
     "*"
@@ -12,7 +13,7 @@ module ApplicationHelper
   end
 
   def chg_select id,name,attr,hash,default_value,next_action
-    tmp_hash=Hash.new
+    tmp_hash={"選択してください"=>""}
     hash.each do|key,value|
       tmp_hash[value]=key
     end
