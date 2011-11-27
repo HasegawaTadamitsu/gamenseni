@@ -12,7 +12,9 @@ helper
  select
 ajax
  page.replace
- remote_function
+ replace for remote_function use jquery(not use protype.js)
+
+
 
 http://www.haselab.com/
 
@@ -23,3 +25,4 @@ http://railsdoc.com/references/select
 
 
 http://kiyorin-net.blogspot.com/2011/03/rails3-selectbox.html
+http://chez-sugi.net/journal-20100907

@@ -1,3 +1,4 @@
+<%=  chg_select_send_data_create_javascript %>
 <%= form_for @gamen, :url => { :action => "confirm" } do |f| %>
   <% if @gamen.errors.any? %>
     <div id="error_explanation">
@@ -26,6 +27,7 @@
                :locals => {:default_value => @gamen.select3_value} %>
    <%= render :partial => "chg_select4",
                :locals => {:default_value => @gamen.select4_value} %>
+  <div id="msg"> </div>
   </div>
 
 
