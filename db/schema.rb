@@ -10,7 +10,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111123065635) do
+ActiveRecord::Schema.define(:version => 20111129202503) do
+
+  create_table "addresses", :force => true do |t|
+    t.string   "zip"
+    t.string   "ken_kanzi"
+    t.string   "sikugun_kanji"
+    t.string   "machi_kanji"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "gamen", :force => true do |t|
     t.string   "title"
