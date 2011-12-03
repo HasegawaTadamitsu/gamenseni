@@ -1,6 +1,5 @@
 <h1>New gamen</h1>
 
-<%=  chg_select_send_data_create_javascript %>
 <%= form_for @gamen, :url => { :action => "confirm" } do |f| %>
   <% if @gamen.errors.any? %>
     <div id="error_explanation">
@@ -21,20 +20,22 @@
 
   </div>
 
+  <%=  chg_select_send_data_create_javascript @gamen.address_selecter %>
+
   <div class=field>
-  <%= chg_select "chg_select1",
+  <%= chg_select @gamen.address_selecter.ken_id,
                "gamen",
                "select1_value",
                @gamen.address_selecter.ken_hash,
                @gamen.select1_value %>
 
-  <%= chg_select "chg_select2",
+  <%= chg_select @gamen.address_selecter.sikugun_id,
                "gamen",
                "select2_value",
                @gamen.address_selecter.sikugun_hash(@gamen.select1_value),
                @gamen.select2_value %>
 
-  <%= chg_select "chg_select3",
+  <%= chg_select @gamen.address_selecter.machi_id,
                "gamen",
                "select3_value",
                @gamen.address_selecter.machi_hash(@gamen.select1_value,

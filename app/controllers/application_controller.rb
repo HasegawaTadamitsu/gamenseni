@@ -24,6 +24,13 @@ class GamenseniError < Exception
   end
 end
 
+class BadParameterError < Exception
+  attr_accessor :message
+  def initialize arg
+    @message = arg
+  end
+end
+
 class SessionMgr
   def initialize session
     if session.nil?

@@ -12,68 +12,93 @@ module ApplicationHelper
     select model,attr,tmp_hash,:selected=>default_value
   end
 
-  def chg_select_send_data_create_javascript adr
+  def chg_select_send_data_create_javascript address
 
-    action_url = url_for :action => 'chg_select1'
+    action_url = url_for :action => 'chg_select'
+    ken_id = address.ken_id
+    sikugun_id = address.sikugun_id
+    machi_id = address.machi_id
 
     javascript_tag (<<-EOS
     $(function() {
-      $("#chg_select1").change( onChangeSelect1() );
-      $("#chg_select2").change( onChangeSelect2() );
-      $("#chg_select3").change( onChangeSelect3() );
-      send_data = function() {
-         send_data1= $('#chg_select1').val() ;
-         send_data2= $('#chg_select2').val() ;
-         send_data3= $('#chg_select3').val() ;
-         var data = { chg_select1:send_data1,
-                      chg_select2:send_data2,
-                      chg_select3:send_data3};
-         return data;
-}
-chg_select1_function() {
-         send_data1= $('#chg_select1').val() ;
-         send_data2= $('#chg_select2').val() ;
-         send_data3= $('#chg_select3').val() ;
-         var data = { chg_select1:send_data1,
-                      chg_select2:send_data2,
-                      chg_select3:send_data3};
+      send_data = function(selecter) {
+        send_data1 = $('##{ken_id}').val();
+        send_data2 = $('##{sikugun_id}').val();
+        send_data3 = $('##{machi_id}').val();
+        var data = { selecter:selecter,
+                     ken:send_data1,
+                     sikugun:send_data2,
+                     machi:send_data3};
+        return data;
+      };
+      set_sending_msg = function(){
+        $('#msg').html('sending');
+      };
+      clear_msg = function(){
+        $('#msg').html('');
+      };
+      set_select_misentaku = function(id){
+        var optionItems = new Array();
+        optionItems.push(new Option("選択してください",""));
+        $("#" + id).empty();
+        $("#" + id).append(optionItems);
+      };
+
+      set_select = function(selecter_id,data){
+        var change_selecter_id = "";
+        if( selecter_id == "#{ken_id}" ){
+          change_selecter_id = "#{sikugun_id}";
+          set_select_misentaku("#{machi_id}");
+        } else if(selecter_id == "#{sikugun_id}" ){
+          change_selecter_id = "#{machi_id}";
+        } else {
+          return;
+        }
+        var optionItems = new Array();
+        optionItems.push(new Option("選択してください",""));
+        for(var key in data){ 
+          optionItems.push(new Option(data[key], key));
+        }
+        $("#"+change_selecter_id).empty();
+        $("#"+change_selecter_id).append(optionItems);
+      };
+      onChangeSelect = function(selecter_id) {
          var aj = $.ajax( {
              type: 'post',
-             async: false,
              url:  '#{action_url}',
              dataType: 'json',
-             data: data,
+             data: send_data(selecter_id),
              beforeSend: function(){
-                   $('#msg').html('sending');
+               set_sending_msg();
              },
              success: function(response, status, xhr){
-                 var set_data = $.parseJSON(xhr.responseText)[0];
-                 var optionItems = new Array();
-                 $('#chg_select2').empty();
-                 for(var key in set_data){ 
-                   optionItems.push(new Option(set_data[key], key));
-                 }
-                 $('#chg_select2').append(optionItems);
+               var result_data = $.parseJSON(xhr.responseText);
+               set_select(selecter_id,result_data['hash']);
              },
              error:  function(){
-                    alert('error');
+               alert('error');
              },
              complete: function(){
-                    $('#msg').html('');
+               clear_msg();        
              }
          });
-      });
-    });
+      }
+      $("##{ken_id}").change( function(){
+                                onChangeSelect('#{ken_id}');
+                               });
+      $("##{sikugun_id}").change( function(){
+                                    onChangeSelect('#{sikugun_id}');
+                               } );
+      $("##{machi_id}").change( function(){
+                                  onChangeSelect('#{machi_id}');
+                               } );
+   });
    EOS
    )
   end
 
   def chg_select id,name,attr,hash,default_value
-    tmp_hash= Hash.new
-    hash.each do|key,value|
-      tmp_hash[value]=key
-    end
-    select name,attr,tmp_hash,
+    select name,attr,hash.invert,
         options = { :include_blank => '選択してください',
                     :selected => default_value},
         html_options ={  :id => "#{id}" }

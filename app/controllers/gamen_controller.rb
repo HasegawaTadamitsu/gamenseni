@@ -49,12 +49,15 @@ class GamenController < ApplicationController
     respond_with  @data
   end
 
-  def chg_select1
-    ken     = params[:chg_select1]
-    sikugun = params[:chg_select2]
-    machi   = params[:chg_select3]
-    adr = Address.new
-    ajax = adr.to_client_data ken,sikugun,machi
+  def chg_select
+    selecter =params[:selecter]
+    ken     = params[:ken]
+    sikugun = params[:sikugun]
+    machi   = params[:machi]
+    
+    gamen = Gamen.new
+    adr = gamen.address_selecter
+    ajax = adr.to_client_data selecter,ken,sikugun,machi
     render :json => ajax
   end
 

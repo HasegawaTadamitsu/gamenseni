@@ -24,6 +24,9 @@ class Gamen < ActiveRecord::Base
 
   def do_after_initialize
     @address_selecter = Address.new
+    @address_selecter.ken_id = "ken_ID"
+    @address_selecter.sikugun_id = "SikuGUn_ID"
+    @address_selecter.machi_id = "Machi_ID"
   end
 
 end
