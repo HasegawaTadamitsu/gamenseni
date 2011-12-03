@@ -53,6 +53,19 @@ class Address < ActiveRecord::Base
     ret
   end
 
+  def find_zip ken_code,sikugun_code,machi_code
+    return nil if ken_code.nil?
+    return nil if sikugun_code.nil?
+    return nil if machi_code.nil?
+
+    data = Address.find(:all,
+      :select =>["zip"], :conditions =>
+           ["ken_code == '?' and sikugun_code == '?' and machi_code == '?'" ,
+             ken_code,sikugun_code,machi_code])
+    return nil if data.nil? || data.size == 0
+    ret = data.first[:zip]
+  end
+
  def to_client_data selecter_id,ken,sikugun,machi
    ret= Hash.new
    case  selecter_id

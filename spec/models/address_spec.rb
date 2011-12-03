@@ -41,4 +41,24 @@ describe 'address 正常系' do
       @hash.count.should_not == 0
     end
   end
+
+  context "get zip" do
+    before do
+      adrs = Address.new
+      @ret = adrs.find_zip 1,1,1
+    end
+    it "result is not nil" do
+      @ret.nil?.should be_false
+    end
+  end
+  context "get not found zip" do
+    before do
+      adrs = Address.new
+      @ret = adrs.find_zip 0,1,1
+    end
+    it "result is nil" do
+      @ret.nil?.should  be_true
+    end
+  end
+
 end
