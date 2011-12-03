@@ -13,6 +13,8 @@
 ActiveRecord::Schema.define(:version => 20111129202503) do
 
   create_table "addresses", :force => true do |t|
+    t.string   "ken_code"
+    t.string   "sikugun_code"
     t.string   "zip"
     t.string   "ken_kanji"
     t.string   "sikugun_kanji"

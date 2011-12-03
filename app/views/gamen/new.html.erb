@@ -34,6 +34,13 @@
                @gamen.address_selecter.sikugun_hash(@gamen.select1_value),
                @gamen.select2_value %>
 
+  <%= chg_select "chg_select3",
+               "gamen",
+               "select3_value",
+               @gamen.address_selecter.machi_hash(@gamen.select1_value,
+                                                  @gamen.select2_value),
+               @gamen.select3_value %>
+
   <div id="msg"> </div>
   </div>
 

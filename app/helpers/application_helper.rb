@@ -12,22 +12,31 @@ module ApplicationHelper
     select model,attr,tmp_hash,:selected=>default_value
   end
 
-  def chg_select_send_data_create_javascript
+  def chg_select_send_data_create_javascript adr
 
     action_url = url_for :action => 'chg_select1'
 
     javascript_tag (<<-EOS
     $(function() {
-      $("#chg_select1").change(function() {
+      $("#chg_select1").change( onChangeSelect1() );
+      $("#chg_select2").change( onChangeSelect2() );
+      $("#chg_select3").change( onChangeSelect3() );
+      send_data = function() {
          send_data1= $('#chg_select1').val() ;
          send_data2= $('#chg_select2').val() ;
          send_data3= $('#chg_select3').val() ;
-         send_data4= $('#chg_select4').val() ;
          var data = { chg_select1:send_data1,
                       chg_select2:send_data2,
-                      chg_select3:send_data3,
-                      chg_select4:send_data4};
-
+                      chg_select3:send_data3};
+         return data;
+}
+chg_select1_function() {
+         send_data1= $('#chg_select1').val() ;
+         send_data2= $('#chg_select2').val() ;
+         send_data3= $('#chg_select3').val() ;
+         var data = { chg_select1:send_data1,
+                      chg_select2:send_data2,
+                      chg_select3:send_data3};
          var aj = $.ajax( {
              type: 'post',
              async: false,
