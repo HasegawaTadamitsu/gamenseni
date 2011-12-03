@@ -59,7 +59,7 @@ module ApplicationHelper
    )
   end
 
-  def chg_select id,name,attr,hash,default_value,next_action
+  def chg_select id,name,attr,hash,default_value
     tmp_hash= Hash.new
     hash.each do|key,value|
       tmp_hash[value]=key

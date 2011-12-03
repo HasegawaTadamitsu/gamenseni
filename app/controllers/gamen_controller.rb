@@ -4,7 +4,6 @@ class GamenController < ApplicationController
 
   def new
     @gamen = Gamen.new
-    set_all_select_hash @gamen
   end
 
   def confirm
@@ -15,7 +14,6 @@ class GamenController < ApplicationController
     end
     @gamen = Gamen.new(para)
     if not @gamen.valid?
-      set_all_select_hash @gamen
       render :action => "new" 
     end
     my_session = SessionMgr.new session
@@ -26,10 +24,8 @@ class GamenController < ApplicationController
     my_session = SessionMgr.new session
     my_session.valid?
     @gamen = my_session.get
-    set_all_select_hash @gamen
     my_session.kill
 
-    set_all_select_hash
     render :action => "new"
   end
 
@@ -63,32 +59,15 @@ class GamenController < ApplicationController
     render :json => select1_hash
   end
 
-  def chg_select2
-    #todo
-    set_all_select_hash
-    render :chg_select
-  end
-
-  def chg_select3
-    #todo
-    set_select_hash_from_select3 10, 20, 30
-    render :chg_select
-  end
 
   private 
-  def set_all_select_hash gamen
-    @select1_hash = gamen.select1_hash
-    @select2_hash = gamen.select2_hash
-    @select3_hash = gamen.select3_hash
-    @select4_hash = gamen.select4_hash
-  end
 
 end
 
 class SessionMgr
   def initialize session
     if session.nil?
-      raise "bad session."
+      raise GamenseniError.new("bad session.")
     end
     @my_session  = session
     @data = session[:gamen]
@@ -100,7 +79,7 @@ class SessionMgr
   
   def valid?
     if @data.nil?
-      raise "bad request? session is nil."
+      raise GamenseniError.new("bad request? session is nil.")
     end
   end
 
