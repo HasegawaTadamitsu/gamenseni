@@ -16,7 +16,16 @@ describe 'address 正常系' do
   context "get sikugun data" do
     before do
       adrs = Address.new
-      @hash = adrs.sikugun_hash '長野県'
+      @hash = adrs.sikugun_hash 1
+    end
+    it "sikugun_hash count not 0" do
+      @hash.count.should_not == 0
+    end
+  end
+  context "get sikugun data from string" do
+    before do
+      adrs = Address.new
+      @hash = adrs.sikugun_hash "1"
     end
     it "sikugun_hash count not 0" do
       @hash.count.should_not == 0
@@ -26,7 +35,7 @@ describe 'address 正常系' do
   context "get machi data" do
     before do
       adrs = Address.new
-      @hash = adrs.machi_hash '長野県','飯田市'
+      @hash = adrs.machi_hash  1, 2
     end
     it "hash count not 0" do
       @hash.count.should_not == 0

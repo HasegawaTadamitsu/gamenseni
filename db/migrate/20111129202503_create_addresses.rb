@@ -3,6 +3,7 @@ class CreateAddresses < ActiveRecord::Migration
     create_table :addresses do |t|
       t.string :ken_code
       t.string :sikugun_code
+      t.string :machi_code
       t.string :zip
       t.string :ken_kanji
       t.string :sikugun_kanji
