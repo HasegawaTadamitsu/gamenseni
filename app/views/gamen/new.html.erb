@@ -28,6 +28,12 @@
                @gamen.address_selecter.ken_hash,
                @gamen.select1_value %>
 
+  <%= chg_select "chg_select2",
+               "gamen",
+               "select2_value",
+               @gamen.address_selecter.sikugun_hash(@gamen.select1_value),
+               @gamen.select2_value %>
+
   <div id="msg"> </div>
   </div>
 

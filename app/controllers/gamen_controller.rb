@@ -8,10 +8,8 @@ class GamenController < ApplicationController
 
   def confirm
     para = params[:gamen]
-    if para.nil?
-      redirect_to :action =>'new'
-      return
-    end
+    raise GamenseniError if para.nil?
+
     @gamen = Gamen.new(para)
     if not @gamen.valid?
       render :action => "new" 
@@ -34,9 +32,8 @@ class GamenController < ApplicationController
     my_session.valid?
 
     @gamen = my_session.get
-    if not @gamen.save
-      render :action => "new" 
-    end
+    raise GamenseniError  if not @gamen.save
+
     redirect_to :action=>'complete'
   end
 
@@ -52,45 +49,16 @@ class GamenController < ApplicationController
     respond_with  @data
   end
 
-
   def chg_select1
-    #todo
-    select1_hash = [ 1=>"111",2=>"222"] 
-    render :json => select1_hash
+    ken     = params[:chg_select1]
+    sikugun = params[:chg_select2]
+    machi   = params[:chg_select3]
+    adr = Address.new
+    ajax = adr.to_client_data ken,sikugun,machi
+    render :json => ajax
   end
-
 
   private 
 
 end
 
-class SessionMgr
-  def initialize session
-    if session.nil?
-      raise GamenseniError.new("bad session.")
-    end
-    @my_session  = session
-    @data = session[:gamen]
-  end
-
-  def get
-    @data
-  end
-  
-  def valid?
-    if @data.nil?
-      raise GamenseniError.new("bad request? session is nil.")
-    end
-  end
-
-  def set data
-    @my_session[:gamen] = data
-    @data = data
-  end
-
-  def kill
-    @my_session[:gamen] = nil
-    @data  = nil
-  end
-
-end

@@ -14,7 +14,7 @@ ActiveRecord::Schema.define(:version => 20111129202503) do
 
   create_table "addresses", :force => true do |t|
     t.string   "zip"
-    t.string   "ken_kanzi"
+    t.string   "ken_kanji"
     t.string   "sikugun_kanji"
     t.string   "machi_kanji"
     t.datetime "created_at"
