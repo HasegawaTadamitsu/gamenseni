@@ -9,8 +9,8 @@ class Gamen < ActiveRecord::Base
 
   def self.select_data
     {
-    0=>"現在の時刻",
-    1=>"最後にアクセスしてから"
+    0=>"DBを使わないセレクト",
+    1=>"モデルに定義でいいのかなぁ。"
     }
   end
 
