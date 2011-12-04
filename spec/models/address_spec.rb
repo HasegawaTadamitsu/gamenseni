@@ -42,23 +42,42 @@ describe 'address 正常系' do
     end
   end
 
-  context "get zip" do
+  context "get by code" do
     before do
       adrs = Address.new
-      @ret = adrs.find_zip 1,1,1
+      @ret = adrs.find_by_code 1,1,1
     end
     it "result is not nil" do
       @ret.nil?.should be_false
     end
   end
-  context "get not found zip" do
+  context "get not by code" do
     before do
       adrs = Address.new
-      @ret = adrs.find_zip 0,1,1
+      @ret = adrs.find_by_code 0,1,1
     end
     it "result is nil" do
       @ret.nil?.should  be_true
     end
   end
 
+  context "get by zip" do
+    before do
+      adrs = Address.new
+      @ret = adrs.find_by_zip 387,'0007'
+    end
+    it "result is nil" do
+      @ret.nil?.should  be_false
+    end
+  end
+
+  context "get not by zip" do
+    before do
+      adrs = Address.new
+      @ret = adrs.find_by_zip 387,'9999'
+    end
+    it "result is nil" do
+      @ret.nil?.should  be_true
+    end
+  end
 end

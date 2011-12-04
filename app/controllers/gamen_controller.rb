@@ -8,7 +8,7 @@ class GamenController < ApplicationController
 
   def confirm
     para = params[:gamen]
-    raise GamenseniError if para.nil?
+    raise BadParameterError.new("paramter is nill") if para.nil?
 
     @gamen = Gamen.new(para)
     if not @gamen.valid?
@@ -32,7 +32,7 @@ class GamenController < ApplicationController
     my_session.valid?
 
     @gamen = my_session.get
-    raise GamenseniError  if not @gamen.save
+    raise GamenseniError.new("session is nil") if @gamen.nil?
 
     redirect_to :action=>'complete'
   end
@@ -71,6 +71,16 @@ class GamenController < ApplicationController
     ajax = adr.to_client_zip selecter,ken,sikugun,machi
     render :json => ajax
   end
+
+  def chg_from_zip
+    zip1 = params[:zip1]
+    zip2 = params[:zip2]
+    gamen = Gamen.new
+    adr = gamen.address_selecter
+    ajax = adr.to_client_from_zip zip1,zip2
+    render :json => ajax
+  end
+
   private 
 
 end

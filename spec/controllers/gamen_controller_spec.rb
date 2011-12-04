@@ -37,10 +37,17 @@ describe GamenController do
     end
   end
 
-  describe "GET 'chg_select1'" do
+  describe "GET 'chg_select'" do
     it "returns http success" do
-      get 'chg_select1'
-      response.should be_success
+      lambda{get('chg_select')}.should 
+          raise_error( BadParameterError)
+    end
+  end
+
+  describe "GET 'chg_zip'" do
+    it "returns http success" do
+      lambda{get('chg_zip')}.should 
+          raise_error( GamenseniError)
     end
   end
 

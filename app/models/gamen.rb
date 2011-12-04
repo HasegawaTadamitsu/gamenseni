@@ -30,6 +30,13 @@ class Gamen < ActiveRecord::Base
     @address_selecter.msg_id = "Message_ID"
     @address_selecter.zip1_id = "zip1_ID"
     @address_selecter.zip2_id = "zip2_ID"
+    @address_selecter.search_button_id = "search_ID"
   end
 
+  def address
+    res=@address_selecter.find_by_code(
+             select1_value, select2_value, select3_value)
+    return "" if res.nil?
+    res[:ken_kanji] + res[:sikugun_kanji] + res[:machi_kanji]
+  end
 end

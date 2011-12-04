@@ -4,5 +4,6 @@ ja:
       gamen: "がめん"
     attributes:
       gamen:
-        title: "たいとる"
+        title: "--title--"
+        body:  "**body**"
 

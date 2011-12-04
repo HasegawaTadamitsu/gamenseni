@@ -46,6 +46,9 @@
   郵便番号
     <%= f.text_field :zip1,:id=>@gamen.address_selecter.zip1_id ,:size=>3 %>-
     <%= f.text_field :zip2,:id=>@gamen.address_selecter.zip2_id ,:size=>4 %>
+    <%= link_to "郵便番号で検索する","",
+           html_options={:id => @gamen.address_selecter.search_button_id} %>
+
   </div>
 
   <div class="field">
@@ -59,7 +62,6 @@
   <div class="actions">
     <%= f.submit %>
   </div>
+
 <% end %>
-
-
 
