@@ -61,6 +61,16 @@ class GamenController < ApplicationController
     render :json => ajax
   end
 
+  def chg_zip
+    selecter =params[:selecter]
+    ken     = params[:ken]
+    sikugun = params[:sikugun]
+    machi   = params[:machi]
+    gamen = Gamen.new
+    adr = gamen.address_selecter
+    ajax = adr.to_client_zip selecter,ken,sikugun,machi
+    render :json => ajax
+  end
   private 
 
 end

@@ -42,9 +42,11 @@
                                                   @gamen.select2_value),
                @gamen.select3_value %>
 
-  <div id="msg"> </div>
+  <div id="<%=@gamen.address_selecter.msg_id %>" > </div>
+  郵便番号
+    <%= f.text_field :zip1,:id=>@gamen.address_selecter.zip1_id ,:size=>3 %>-
+    <%= f.text_field :zip2,:id=>@gamen.address_selecter.zip2_id ,:size=>4 %>
   </div>
-
 
   <div class="field">
     <%= f.label :title %><%=hissu%> <br />

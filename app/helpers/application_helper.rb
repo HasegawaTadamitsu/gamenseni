@@ -14,38 +14,58 @@ module ApplicationHelper
 
   def chg_select_send_data_create_javascript address
 
-    action_url = url_for :action => 'chg_select'
+    javascript_tag (<<-EOS
+    EOS
+    )
+
+    chg_select_url = url_for :action => 'chg_select'
+    chg_zip_url    = url_for :action => 'chg_zip'
     ken_id = address.ken_id
     sikugun_id = address.sikugun_id
     machi_id = address.machi_id
+    zip1_id = address.zip1_id
+    zip2_id = address.zip2_id
+    msg_id = address.msg_id
 
     javascript_tag (<<-EOS
     $(function() {
-      send_data = function(selecter) {
-        send_data1 = $('##{ken_id}').val();
-        send_data2 = $('##{sikugun_id}').val();
-        send_data3 = $('##{machi_id}').val();
-        var data = { selecter:selecter,
-                     ken:send_data1,
-                     sikugun:send_data2,
-                     machi:send_data3};
-        return data;
+      var set_sending_msg = function(id){
+        $("#"+id).html("sending");
       };
-      set_sending_msg = function(){
-        $('#msg').html('sending');
+      var clear_msg = function(id){
+        $("#"+id).html("");
       };
-      clear_msg = function(){
-        $('#msg').html('');
-      };
-      set_select_misentaku = function(id){
+
+      var set_select_misentaku = function(id){
         var optionItems = new Array();
         optionItems.push(new Option("選択してください",""));
         $("#" + id).empty();
         $("#" + id).append(optionItems);
       };
 
-      set_select = function(selecter_id,data){
+      var clear_zip = function(zip1_id,zip2_id) {
+        $("#"+zip1_id).val("");
+        $("#"+zip2_id).val("");
+      };
+      var set_zip = function(zip1_id, zip2_id, data){
+        $("#"+zip1_id).val(data["zip1"]);
+        $("#"+zip2_id).val(data["zip2"]);
+      };
+
+      var send_data = function(selecter) {
+        send_data1 = $("##{ken_id}").val();
+        send_data2 = $("##{sikugun_id}").val();
+        send_data3 = $("##{machi_id}").val();
+        var data = { selecter:selecter,
+                     ken:send_data1,
+                     sikugun:send_data2,
+                     machi:send_data3};
+        return data;
+      };
+
+      var set_select = function(selecter_id,data){
         var change_selecter_id = "";
+        clear_zip("#{zip1_id}","#{zip2_id}");
         if( selecter_id == "#{ken_id}" ){
           change_selecter_id = "#{sikugun_id}";
           set_select_misentaku("#{machi_id}");
@@ -62,35 +82,57 @@ module ApplicationHelper
         $("#"+change_selecter_id).empty();
         $("#"+change_selecter_id).append(optionItems);
       };
-      onChangeSelect = function(selecter_id) {
+
+      var onChangeSelect = function(selecter_id) {
          var aj = $.ajax( {
-             type: 'post',
-             url:  '#{action_url}',
-             dataType: 'json',
+             type: "post",
+             url:  "#{chg_select_url}",
+             dataType: "json",
              data: send_data(selecter_id),
              beforeSend: function(){
-               set_sending_msg();
+               set_sending_msg("#{msg_id}");
              },
              success: function(response, status, xhr){
                var result_data = $.parseJSON(xhr.responseText);
-               set_select(selecter_id,result_data['hash']);
+               set_select(selecter_id,result_data["hash"]);
              },
              error:  function(){
-               alert('error');
+               alert("error");
              },
              complete: function(){
-               clear_msg();        
+               clear_msg("#{msg_id}");
+             }
+         });
+      }
+      var onSetZip = function(selecter_id) {
+         var aj = $.ajax( {
+             type: "post",
+             url:  "#{chg_zip_url}",
+             dataType: "json",
+             data: send_data(selecter_id),
+             beforeSend: function(){
+               set_sending_msg("#{msg_id}");
+             },
+             success: function(response, status, xhr){
+               var result_data = $.parseJSON(xhr.responseText);
+               set_zip("#{zip1_id}","#{zip2_id}",result_data);
+             },
+             error:  function(){
+               alert("error");
+             },
+             complete: function(){
+               clear_msg("#{msg_id}");
              }
          });
       }
       $("##{ken_id}").change( function(){
-                                onChangeSelect('#{ken_id}');
+                                onChangeSelect("#{ken_id}");
                                });
       $("##{sikugun_id}").change( function(){
-                                    onChangeSelect('#{sikugun_id}');
+                                    onChangeSelect("#{sikugun_id}");
                                } );
       $("##{machi_id}").change( function(){
-                                  onChangeSelect('#{machi_id}');
+                                  onSetZip("#{machi_id}");
                                } );
    });
    EOS
@@ -99,7 +141,7 @@ module ApplicationHelper
 
   def chg_select id,name,attr,hash,default_value
     select name,attr,hash.invert,
-        options = { :include_blank => '選択してください',
+        options = { :include_blank => "選択してください",
                     :selected => default_value},
         html_options ={  :id => "#{id}" }
   end

@@ -18,7 +18,7 @@ class Gamen < ActiveRecord::Base
   attr_accessor :select1_value
   attr_accessor :select2_value
   attr_accessor :select3_value
-  attr_accessor :select4_value
+  attr_accessor :zip1,:zip2
   attr_accessor :address_selecter
 
 
@@ -27,6 +27,9 @@ class Gamen < ActiveRecord::Base
     @address_selecter.ken_id = "ken_ID"
     @address_selecter.sikugun_id = "SikuGUn_ID"
     @address_selecter.machi_id = "Machi_ID"
+    @address_selecter.msg_id = "Message_ID"
+    @address_selecter.zip1_id = "zip1_ID"
+    @address_selecter.zip2_id = "zip2_ID"
   end
 
 end

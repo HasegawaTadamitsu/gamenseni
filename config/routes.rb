@@ -7,4 +7,5 @@ Gamenseni::Application.routes.draw do
   match "/gamen/create"   => "gamen#create"
   match "/gamen/complete" => "gamen#complete"
   match "/gamen/chg_select"=> "gamen#chg_select"
+  match "/gamen/chg_zip"=> "gamen#chg_zip"
 end

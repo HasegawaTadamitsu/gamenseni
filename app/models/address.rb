@@ -4,6 +4,8 @@ class Address < ActiveRecord::Base
   attr_accessor :ken_id
   attr_accessor :sikugun_id
   attr_accessor :machi_id
+  attr_accessor :msg_id
+  attr_accessor :zip1_id,:zip2_id
   
   def ken_hash
     ret = Hash.new
@@ -60,7 +62,7 @@ class Address < ActiveRecord::Base
 
     data = Address.find(:all,
       :select =>["zip"], :conditions =>
-           ["ken_code == '?' and sikugun_code == '?' and machi_code == '?'" ,
+           ["ken_code == ? and sikugun_code == ? and machi_code == ?" ,
              ken_code,sikugun_code,machi_code])
     return nil if data.nil? || data.size == 0
     ret = data.first[:zip]
@@ -80,4 +82,11 @@ class Address < ActiveRecord::Base
    return ret
  end
 
+ def to_client_zip selecter_id,ken,sikugun,machi
+   zip = find_zip  ken,sikugun,machi
+   ret = Hash.new
+   ret[:zip1] = zip[0...3]
+   ret[:zip2] = zip[3...7]
+   return ret
+ end
 end
