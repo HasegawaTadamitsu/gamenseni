@@ -15,5 +15,8 @@ module Gamenseni
     config.encoding = "utf-8"
 
     config.filter_parameters += [:password]
+
+    config.fixture_path = "#{::Rails.root}/spec/fixtures"
+
   end
 end

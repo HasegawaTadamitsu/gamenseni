@@ -2,10 +2,10 @@
 DATA_PATH=~/work/zip_data
 
 DATA=${DATA_PATH}/ken_all.csv
-OUTPUT=${DATA_PATH}/ken_all_utf8.csv
+OUTPUT=./seed/addresses.csv
 
-#head -n 10000 $DATA |
-cat $DATA |
+head -n 10000 $DATA |
+#cat $DATA |
      nkf -S -w  |cut -f3,7-9 -d"," |
      awk '
       BEGIN {
@@ -17,6 +17,9 @@ cat $DATA |
          ken_count = 0
          sikugun_count = 0
          machi_count = 0
+         printf("%s,%s,%s,%s,%s,%s,%s\n",
+                   "ken_code","sikugun_code","machi_code",
+                   "zip","ken_kanji","sikugun_kanji","machi_kanji")
      }
      ken != $2  {
        ken_count ++
@@ -38,7 +41,7 @@ cat $DATA |
      }
      {
      count ++
-     printf("%d,%d,%d,%d,%s,%s,%s,%s,,\n",count,
+     printf("%02d,%03d,%03d,%s,%s,%s,%s\n",
                                           ken_count,sikugun_count,machi_count,
                                           $1,$2,$3,$4)
      }

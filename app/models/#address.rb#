@@ -26,7 +26,7 @@ class Address < ActiveRecord::Base
   
     ret = Hash.new
     data = Address.find(:all,:select =>["sikugun_code","sikugun_kanji"],
-                        :conditions => ["ken_code = ?", ken_code],
+                        :conditions => ["ken_code == '?'", ken_code],
                         :group => ["sikugun_code","sikugun_kanji"],
                         :order => "sikugun_code")
     data.each  do | find_result |
@@ -44,7 +44,7 @@ class Address < ActiveRecord::Base
     ret = Hash.new
     data = Address.find(:all,
               :select =>["machi_code","machi_kanji"],
-              :conditions => ["ken_code = ? and sikugun_code = ?",
+              :conditions => ["ken_code == ? and sikugun_code == ?",
                                ken_code,sikugun_code],
               :group => ["machi_code","machi_kanji"],
               :order => "machi_code" )
@@ -64,7 +64,7 @@ class Address < ActiveRecord::Base
     data = Address.find(:all,
       :select =>["zip","ken_kanji","sikugun_kanji","machi_kanji"], 
       :conditions =>
-         ["ken_code = ? and sikugun_code = ? and machi_code = ?" ,
+         ["ken_code == ? and sikugun_code == ? and machi_code == ?" ,
          ken_code,sikugun_code,machi_code])
     return nil if data.nil? || data.size == 0
     raise "unkown fild.count != 1.#{ken_code}/#{sikugun_code}/#{machi_code}" \
@@ -77,7 +77,7 @@ class Address < ActiveRecord::Base
     return nil if zip2.nil?
     data = Address.find(:all,
       :conditions =>
-         ["zip = ?",  "" + zip1.to_s + zip2.to_s ])
+         ["zip == ?",  "" + zip1.to_s + zip2.to_s ])
     return nil if data.nil? || data.size == 0
     ret = data.first
   end

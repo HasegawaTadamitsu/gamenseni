@@ -10,8 +10,8 @@ gem 'jquery-rails', '>= 1.0.12'
 gem 'pg'
 
 group :development, :test do
-  gem 'sqlite3'
   gem 'rspec-rails'
   gem 'rcov'
   gem 'spork'
 end
+
