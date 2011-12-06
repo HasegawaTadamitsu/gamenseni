@@ -12,7 +12,7 @@ class Address < ActiveRecord::Base
     ret = Hash.new
     data = Address.find(:all,:select =>["ken_code","ken_kanji"],
                         :group => ["ken_code","ken_kanji"],
-                        :order => "id")
+                        :order => "ken_code")
     data.each  do | find_result |
       key = find_result[:ken_code]
       val = find_result[:ken_kanji]
@@ -28,7 +28,7 @@ class Address < ActiveRecord::Base
     data = Address.find(:all,:select =>["sikugun_code","sikugun_kanji"],
                         :conditions => ["ken_code == ?", ken_code],
                         :group => ["sikugun_code","sikugun_kanji"],
-                        :order => "id")
+                        :order => "sikugun_code")
     data.each  do | find_result |
       key = find_result[:sikugun_code]
       val = find_result[:sikugun_kanji]
@@ -47,7 +47,7 @@ class Address < ActiveRecord::Base
               :conditions => ["ken_code == ? and sikugun_code == ?",
                                ken_code,sikugun_code],
               :group => ["machi_code","machi_kanji"],
-              :order => "id" )
+              :order => "machi_code" )
     data.each  do | find_result |
       key = find_result[:machi_code]
       val = find_result[:machi_kanji]
