@@ -16,7 +16,5 @@ module Gamenseni
 
     config.filter_parameters += [:password]
 
-    config.fixture_path = "#{::Rails.root}/spec/fixtures"
-
   end
 end
