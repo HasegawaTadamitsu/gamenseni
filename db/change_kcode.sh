@@ -3,8 +3,9 @@ DATA_PATH=~/work/zip_data
 
 DATA=${DATA_PATH}/ken_all.csv
 OUTPUT=./seed/addresses.csv
+OUTPUT=/tmp/addresses.csv
 
-head -n 30000 $DATA |
+#head -n 30000 $DATA |
 #cat $DATA |
      nkf -S -w  |cut -f3,7-9 -d"," |
      awk '
