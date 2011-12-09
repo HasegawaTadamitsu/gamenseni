@@ -1,16 +1,17 @@
 class CreateAddresses < ActiveRecord::Migration
   def self.up
     create_table :addresses do |t|
-      t.string :ken_code
+      t.string :ken_code,:null => false
       t.string :sikugun_code
       t.string :machi_code
-      t.string :zip
+      t.string :zip1
+      t.string :zip2
       t.string :ken_kanji
       t.string :sikugun_kanji
       t.string :machi_kanji
-
-      t.timestamps
     end
+    add_index :addresses, :zip1,:zip2
+    add_index :addresses, :ken_code
   end
 
   def self.down

@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+	<title>Module: ApplicationHelper</title>
+
+	<link rel="stylesheet" href="./rdoc.css" type="text/css" media="screen" />
+
+	<script src="./js/jquery.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/thickbox-compressed.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/quicksearch.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="./js/darkfish.js" type="text/javascript"
+		charset="utf-8"></script>
+
+</head>
+<body class="module">
+
+	<div id="metadata">
+		<div id="home-metadata">
+			<div id="home-section" class="section">
+        <h3 class="section-header">
+          <a href="./index.html">Home</a>
+          <a href="./index.html#classes">Classes</a>
+          <a href="./index.html#methods">Methods</a>
+        </h3>
+			</div>
+		</div>
+
+		<div id="file-metadata">
+			<div id="file-list-section" class="section">
+				<h3 class="section-header">In Files</h3>
+				<div class="section-body">
+					<ul>
+					
+						<li><a href="./app/helpers/application_helper_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+							class="thickbox" title="app/helpers/application_helper.rb">app/helpers/application_helper.rb</a></li>
+					
+					</ul>
+				</div>
+			</div>
+
+			
+		</div>
+
+		<div id="class-metadata">
+
+			<!-- Parent Class -->
+			
+
+			<!-- Namespace Contents -->
+			
+
+			<!-- Method Quickref -->
+			
+			<div id="method-list-section" class="section">
+				<h3 class="section-header">Methods</h3>
+				<ul class="link-list">
+					
+					<li><a href="#method-i-chg_select">#chg_select</a></li>
+					
+					<li><a href="#method-i-chg_select_send_data_create_javascript">#chg_select_send_data_create_javascript</a></li>
+					
+					<li><a href="#method-i-hissu">#hissu</a></li>
+					
+					<li><a href="#method-i-my_label_from_hash">#my_label_from_hash</a></li>
+					
+					<li><a href="#method-i-my_select">#my_select</a></li>
+					
+				</ul>
+			</div>
+			
+
+			<!-- Included Modules -->
+			
+		</div>
+
+		<div id="project-metadata">
+			
+			
+			<div id="fileindex-section" class="section project-section">
+				<h3 class="section-header">Files</h3>
+				<ul>
+				
+					<li class="file"><a href="./doc/README_FOR_APP.html">README_FOR_APP</a></li>
+				
+				</ul>
+			</div>
+			
+
+			<div id="classindex-section" class="section project-section">
+				<h3 class="section-header">Class Index
+					<span class="search-toggle"><img src="./images/find.png"
+						height="16" width="16" alt="[+]"
+						title="show/hide quicksearch" /></span></h3>
+				<form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+				<fieldset>
+					<legend>Quicksearch</legend>
+					<input type="text" name="quicksearch" value=""
+						class="quicksearch-field" />
+				</fieldset>
+				</form>
+
+				<ul class="link-list">
+				
+					<li><a href="./Address.html">Address</a></li>
+				
+					<li><a href="./ApplicationController.html">ApplicationController</a></li>
+				
+					<li><a href="./ApplicationHelper.html">ApplicationHelper</a></li>
+				
+					<li><a href="./BadParameterError.html">BadParameterError</a></li>
+				
+					<li><a href="./Gamen.html">Gamen</a></li>
+				
+					<li><a href="./GamenController.html">GamenController</a></li>
+				
+					<li><a href="./GamenHelper.html">GamenHelper</a></li>
+				
+					<li><a href="./GamenseniError.html">GamenseniError</a></li>
+				
+					<li><a href="./SessionMgr.html">SessionMgr</a></li>
+				
+				</ul>
+				<div id="no-class-search-results" style="display: none;">No matching classes.</div>
+			</div>
+
+			
+		</div>
+	</div>
+
+	<div id="documentation">
+		<h1 class="module">ApplicationHelper</h1>
+
+		<div id="description">
+			
+		</div>
+
+		<!-- Constants -->
+		
+
+		<!-- Attributes -->
+		
+
+		<!-- Methods -->
+		
+		<div id="public-instance-method-details" class="method-section section">
+			<h3 class="section-header">Public Instance Methods</h3>
+
+		
+			<div id="chg-select-method" class="method-detail ">
+				<a name="method-i-chg_select"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">chg_select</span><span
+						class="method-args">(id,name,attr,hash,default_value)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="chg-select-source">
+<pre>
+     <span class="ruby-comment cmt"># File app/helpers/application_helper.rb, line 183</span>
+183:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">chg_select</span> <span class="ruby-identifier">id</span>,<span class="ruby-identifier">name</span>,<span class="ruby-identifier">attr</span>,<span class="ruby-identifier">hash</span>,<span class="ruby-identifier">default_value</span>
+184:     <span class="ruby-identifier">select</span> <span class="ruby-identifier">name</span>,<span class="ruby-identifier">attr</span>,<span class="ruby-identifier">hash</span>.<span class="ruby-identifier">invert</span>,
+185:         <span class="ruby-identifier">options</span> = { <span class="ruby-value">:include_blank</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;選択してください&quot;</span>,
+186:                     <span class="ruby-value">:selected</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">default_value</span>},
+187:         <span class="ruby-identifier">html_options</span> ={  <span class="ruby-value">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot;#{id}&quot;</span> }
+188:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="chg-select-send-data-create-javascript-method" class="method-detail ">
+				<a name="method-i-chg_select_send_data_create_javascript"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">chg_select_send_data_create_javascript</span><span
+						class="method-args">(address)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="chg-select-send-data-create-javascript-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/helpers/application_helper.rb, line 15</span>
+15:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">chg_select_send_data_create_javascript</span> <span class="ruby-identifier">address</span>
+16: 
+17:     <span class="ruby-identifier">javascript_tag</span> (<span class="ruby-value str"></span>
+18:     )
+19: 
+20:     <span class="ruby-identifier">chg_select_url</span> = <span class="ruby-identifier">url_for</span> <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'chg_select'</span>
+21:     <span class="ruby-identifier">chg_zip_url</span>    = <span class="ruby-identifier">url_for</span> <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'chg_zip'</span>
+22:     <span class="ruby-identifier">chg_from_zip_url</span>    = <span class="ruby-identifier">url_for</span> <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'chg_from_zip'</span>
+23:     <span class="ruby-identifier">ken_id</span> = <span class="ruby-identifier">address</span>.<span class="ruby-identifier">ken_id</span>
+24:     <span class="ruby-identifier">sikugun_id</span> = <span class="ruby-identifier">address</span>.<span class="ruby-identifier">sikugun_id</span>
+25:     <span class="ruby-identifier">machi_id</span> = <span class="ruby-identifier">address</span>.<span class="ruby-identifier">machi_id</span>
+26:     <span class="ruby-identifier">zip1_id</span> = <span class="ruby-identifier">address</span>.<span class="ruby-identifier">zip1_id</span>
+27:     <span class="ruby-identifier">zip2_id</span> = <span class="ruby-identifier">address</span>.<span class="ruby-identifier">zip2_id</span>
+28:     <span class="ruby-identifier">msg_id</span> = <span class="ruby-identifier">address</span>.<span class="ruby-identifier">msg_id</span>
+29:     <span class="ruby-identifier">search_button_id</span> = <span class="ruby-identifier">address</span>.<span class="ruby-identifier">search_button_id</span>
+30: 
+31:     <span class="ruby-identifier">javascript_tag</span> (<span class="ruby-value str">    $(function() {      var set_sending_msg = function(id){        $(&quot;#&quot;+id).html(&quot;sending&quot;);      };      var clear_msg = function(id){        $(&quot;#&quot;+id).html(&quot;&quot;);      };      var set_select_misentaku = function(id){        var optionItems = new Array();        optionItems.push(new Option(&quot;選択してください&quot;,&quot;&quot;));        $(&quot;#&quot; + id).empty();        $(&quot;#&quot; + id).append(optionItems);      };      var clear_zip = function(zip1_id,zip2_id) {        $(&quot;#&quot;+zip1_id).val(&quot;&quot;);        $(&quot;#&quot;+zip2_id).val(&quot;&quot;);      };      var set_zip = function(zip1_id, zip2_id, data){        $(&quot;#&quot;+zip1_id).val(data[&quot;zip1&quot;]);        $(&quot;#&quot;+zip2_id).val(data[&quot;zip2&quot;]);      };      var send_data = function(selecter) {        send_data1 = $(&quot;##{ken_id}&quot;).val();        send_data2 = $(&quot;##{sikugun_id}&quot;).val();        send_data3 = $(&quot;##{machi_id}&quot;).val();        send_zip1 = $(&quot;##{zip1_id}&quot;).val();        send_zip2 = $(&quot;##{zip2_id}&quot;).val();        var data = { selecter:selecter,                     ken:send_data1,                     sikugun:send_data2,                     machi:send_data3,                     zip1:send_zip1,                     zip2:send_zip2};        return data;      };      var set_select = function(selecter_id,data,default_key){        var change_selecter_id = &quot;&quot;;        var optionItems = new Array();        optionItems.push(new Option(&quot;選択してください&quot;,&quot;&quot;));        for(var key in data) {           var opt = new Option(data[key], key);          if( key == default_key) {              opt.defaultSelected = true;          }          optionItems.push(opt);        }        $(&quot;#&quot;+selecter_id).empty();        $(&quot;#&quot;+selecter_id).append(optionItems);      };      var onChangeSelect = function(selecter_id) {         var aj = $.ajax( {             type: &quot;post&quot;,             url:  &quot;#{chg_select_url}&quot;,             dataType: &quot;json&quot;,             data: send_data(selecter_id),             beforeSend: function(){               set_sending_msg(&quot;#{msg_id}&quot;);             },             success: function(response, status, xhr){               var result_data = $.parseJSON(xhr.responseText);              clear_zip(&quot;#{zip1_id}&quot;,&quot;#{zip2_id}&quot;);              if( selecter_id == &quot;#{ken_id}&quot; ){                change_selecter_id = &quot;#{sikugun_id}&quot;;                set_select_misentaku(&quot;#{machi_id}&quot;);              } else if(selecter_id == &quot;#{sikugun_id}&quot; ){                change_selecter_id = &quot;#{machi_id}&quot;;              } else {                return;              }               set_select(change_selecter_id,result_data[&quot;hash&quot;],&quot;&quot;);             },             error:  function(){               alert(&quot;error&quot;);             },             complete: function(){               clear_msg(&quot;#{msg_id}&quot;);             }         });      }      var onSetZip = function(selecter_id) {         var aj = $.ajax( {             type: &quot;post&quot;,             url:  &quot;#{chg_zip_url}&quot;,             dataType: &quot;json&quot;,             data: send_data(selecter_id),             beforeSend: function(){               set_sending_msg(&quot;#{msg_id}&quot;);             },             success: function(response, status, xhr){               var result_data = $.parseJSON(xhr.responseText);               set_zip(&quot;#{zip1_id}&quot;,&quot;#{zip2_id}&quot;,result_data);             },             error:  function(){               alert(&quot;error&quot;);             },             complete: function(){               clear_msg(&quot;#{msg_id}&quot;);             }         });      }      $(&quot;##{ken_id}&quot;).change( function(){                                onChangeSelect(&quot;#{ken_id}&quot;);                               });      $(&quot;##{sikugun_id}&quot;).change( function(){                                    onChangeSelect(&quot;#{sikugun_id}&quot;);                               } );      $(&quot;##{machi_id}&quot;).change( function(){                                  onSetZip(&quot;#{machi_id}&quot;);                               } );      var onSearch = function(ken_id,sikugun_id,machi_id){         var aj = $.ajax( {             type: &quot;post&quot;,             url:  &quot;#{chg_from_zip_url}&quot;,             dataType: &quot;json&quot;,             data: send_data(''),             beforeSend: function(){               set_sending_msg(&quot;#{msg_id}&quot;);             },             success: function(response, status, xhr){               var result_data = $.parseJSON(xhr.responseText);               set_select(&quot;#{ken_id}&quot;,result_data.ken_hash,                                      result_data.ken_code);               set_select(&quot;#{sikugun_id}&quot;,result_data.sikugun_hash,                                          result_data.sikugun_code);               set_select(&quot;#{machi_id}&quot;,result_data.machi_hash,                                        result_data.machi_code);             },             error:  function(){               alert(&quot;error&quot;);             },             complete: function(){               clear_msg(&quot;#{msg_id}&quot;);             }});      };      $(&quot;##{search_button_id}&quot;).live('click', function(){                                 onSearch(&quot;#{ken_id}&quot;,                                 &quot;#{sikugun_id}&quot;,&quot;#{machi_id}&quot;);                                 return false;                                 } );   });</span>
+32:    )
+33:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="hissu-method" class="method-detail ">
+				<a name="method-i-hissu"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">hissu</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="hissu-source">
+<pre>
+   <span class="ruby-comment cmt"># File app/helpers/application_helper.rb, line 3</span>
+3:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">hissu</span>
+4:     <span class="ruby-value str">&quot;*&quot;</span>
+5:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="my-label-from-hash-method" class="method-detail ">
+				<a name="method-i-my_label_from_hash"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">my_label_from_hash</span><span
+						class="method-args">(hash, key)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="my-label-from-hash-source">
+<pre>
+     <span class="ruby-comment cmt"># File app/helpers/application_helper.rb, line 190</span>
+190:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">my_label_from_hash</span> <span class="ruby-identifier">hash</span>, <span class="ruby-identifier">key</span>
+191:     <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">key</span>.<span class="ruby-identifier">to_i</span>]
+192:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="my-select-method" class="method-detail ">
+				<a name="method-i-my_select"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">my_select</span><span
+						class="method-args">(model, attr, hash, default_value)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="my-select-source">
+<pre>
+    <span class="ruby-comment cmt"># File app/helpers/application_helper.rb, line 7</span>
+ 7:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">my_select</span> <span class="ruby-identifier">model</span>, <span class="ruby-identifier">attr</span>, <span class="ruby-identifier">hash</span>, <span class="ruby-identifier">default_value</span>
+ 8:     <span class="ruby-identifier">tmp_hash</span>=<span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
+ 9:     <span class="ruby-identifier">hash</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword kw">do</span><span class="ruby-operator">|</span><span class="ruby-identifier">key</span>,<span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
+10:       <span class="ruby-identifier">tmp_hash</span>[<span class="ruby-identifier">value</span>]=<span class="ruby-identifier">key</span>
+11:     <span class="ruby-keyword kw">end</span>
+12:     <span class="ruby-identifier">select</span> <span class="ruby-identifier">model</span>,<span class="ruby-identifier">attr</span>,<span class="ruby-identifier">tmp_hash</span>,<span class="ruby-value">:selected=</span><span class="ruby-operator">&gt;</span><span class="ruby-identifier">default_value</span>
+13:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+		</div>
+	
+
+	</div>
+
+
+	<div id="rdoc-debugging-section-dump" class="debugging-section">
+	
+		<p>Disabled; run with --debug to generate this.</p>
+	
+	</div>
+
+	<div id="validator-badges">
+		<p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+		<p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
+			Rdoc Generator</a> 1.1.6</small>.</p>
+	</div>
+
+</body>
+</html>
+
