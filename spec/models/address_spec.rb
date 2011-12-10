@@ -45,6 +45,15 @@ describe 'address 正常系' do
   context "get by code" do
     before do
       adrs = Address.new
+      @ret = adrs.find_by_code 99,99,99
+    end
+    it "result is  nil" do
+      @ret.nil?.should be_true
+    end
+  end
+  context "get by code" do
+    before do
+      adrs = Address.new
       @ret = adrs.find_by_code 1,1,1
     end
     it "result is not nil" do
@@ -80,4 +89,29 @@ describe 'address 正常系' do
       @ret.nil?.should  be_true
     end
   end
+
+  context "get not by zeropadding" do
+    before do
+      @adrs = Address.new
+    end
+    it "blank str should 0" do
+      @adrs.send(:zero_padding, "", 1).should  =='0'
+    end
+    it " 1 and length 2  should 01" do
+      @adrs.send(:zero_padding, "1", 2).should  =='01'
+    end
+    it " 1 and length 3  should 001" do
+      @adrs.send(:zero_padding, "1", 3).should  =='001'
+    end
+    it " 1 and length 1  should 1" do
+      @adrs.send(:zero_padding, "1", 1).should  =='1'
+    end
+    it " 11 and length 2  should 11" do
+      @adrs.send(:zero_padding, "11", 2).should  =='11'
+    end
+    it " 023 and length 3  should 023" do
+      @adrs.send(:zero_padding, "023", 3).should  =='023'
+    end
+  end
+
 end

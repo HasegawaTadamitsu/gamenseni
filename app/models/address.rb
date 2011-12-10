@@ -23,10 +23,10 @@ class Address < ActiveRecord::Base
 
   def sikugun_hash ken_code
     return Hash.new if ken_code.nil?
-  
+    ken = zero_padding ken_code,2
     ret = Hash.new
     data = Address.find(:all,:select =>["sikugun_code","sikugun_kanji"],
-                        :conditions => ["ken_code = ?", ken_code],
+                        :conditions => ["ken_code = ?",ken ],
                         :group => ["sikugun_code","sikugun_kanji"],
                         :order => "sikugun_code")
     data.each  do | find_result |
@@ -40,12 +40,13 @@ class Address < ActiveRecord::Base
   def machi_hash ken_code,sikugun_code
     return Hash.new if ken_code.nil?
     return Hash.new if sikugun_code.nil?
-  
+    ken = zero_padding ken_code,2
+    sikugun= zero_padding sikugun_code,3
     ret = Hash.new
     data = Address.find(:all,
               :select =>["machi_code","machi_kanji"],
               :conditions => ["ken_code = ? and sikugun_code = ?",
-                               ken_code,sikugun_code],
+                               ken,sikugun],
               :group => ["machi_code","machi_kanji"],
               :order => "machi_code" )
     data.each  do | find_result |
@@ -61,11 +62,15 @@ class Address < ActiveRecord::Base
     return nil if sikugun_code.nil?
     return nil if machi_code.nil?
 
+    ken = zero_padding ken_code,2
+    sikugun = zero_padding sikugun_code,3
+    machi = zero_padding machi_code,3
+
     data = Address.find(:all,
-      :select =>["zip","ken_kanji","sikugun_kanji","machi_kanji"], 
+      :select =>["zip1","zip2","ken_kanji","sikugun_kanji","machi_kanji"], 
       :conditions =>
          ["ken_code = ? and sikugun_code = ? and machi_code = ?" ,
-         ken_code,sikugun_code,machi_code])
+         ken,sikugun,machi])
     return nil if data.nil? || data.size == 0
     raise "unkown fild.count != 1.#{ken_code}/#{sikugun_code}/#{machi_code}" \
                    if  data.size != 1
@@ -77,12 +82,12 @@ class Address < ActiveRecord::Base
     return nil if zip2.nil?
     data = Address.find(:all,
       :conditions =>
-         ["zip = ?",  "" + zip1.to_s + zip2.to_s ])
+         ["zip1 = ? and zip2 = ?", zip1.to_s ,zip2.to_s ])
     return nil if data.nil? || data.size == 0
-    ret = data.first
+    ret = data
   end
 
- def to_client_data selecter_id,ken,sikugun,machi
+  def to_client_data selecter_id,ken,sikugun,machi
    ret= Hash.new
    case  selecter_id
    when @ken_id
@@ -94,17 +99,17 @@ class Address < ActiveRecord::Base
      raise BadParameterError.new("bad param #{selecter_id}")
    end
    return ret
- end
+  end
 
- def to_client_zip selecter_id,ken,sikugun,machi
+  def to_client_zip selecter_id,ken,sikugun,machi
    result = find_by_code  ken,sikugun,machi
    ret = Hash.new
    ret[:zip1] = result[:zip][0...3]
    ret[:zip2] = result[:zip][3...7]
    return ret
- end
+  end
 
- def to_client_from_zip zip1,zip2
+  def to_client_from_zip zip1,zip2
    result = find_by_zip zip1,zip2
    ret = Hash.new
    ret[:ken_code] = result[:ken_code] if !result.nil?
@@ -114,6 +119,14 @@ class Address < ActiveRecord::Base
    ret[:machi_code] = result[:machi_code]
    ret[:machi_hash] = machi_hash result[:ken_code],result[:sikugun_code]
    return ret
- end
+  end
+
+  private
+  def zero_padding string,length
+    str = string.to_s
+    len = length.to_i
+    zeros = "0" * len
+    return (zeros + str)[- len..-1]
+  end
 
 end

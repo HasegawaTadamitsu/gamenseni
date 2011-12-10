@@ -5,8 +5,8 @@ DATA=${DATA_PATH}/ken_all.csv
 OUTPUT=./seed/addresses.csv
 OUTPUT=/tmp/addresses.csv
 
-head -n 30000 $DATA |
-#cat $DATA |
+#head -n 30000 $DATA |
+cat $DATA |
      nkf -S -w  |cut -f3,7-9 -d"," |
      awk '
       BEGIN {

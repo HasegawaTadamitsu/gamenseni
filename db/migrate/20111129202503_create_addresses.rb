@@ -10,8 +10,7 @@ class CreateAddresses < ActiveRecord::Migration
       t.string :sikugun_kanji
       t.string :machi_kanji
     end
-    add_index :addresses, :zip1,:zip2
-    add_index :addresses, :ken_code
+    add_index :addresses,[:zip1,:zip2]
   end
 
   def self.down

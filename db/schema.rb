@@ -13,16 +13,17 @@
 ActiveRecord::Schema.define(:version => 20111129202503) do
 
   create_table "addresses", :force => true do |t|
-    t.string   "ken_code"
-    t.string   "sikugun_code"
-    t.string   "machi_code"
-    t.string   "zip"
-    t.string   "ken_kanji"
-    t.string   "sikugun_kanji"
-    t.string   "machi_kanji"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string "ken_code",      :null => false
+    t.string "sikugun_code"
+    t.string "machi_code"
+    t.string "zip1"
+    t.string "zip2"
+    t.string "ken_kanji"
+    t.string "sikugun_kanji"
+    t.string "machi_kanji"
   end
+
+  add_index "addresses", ["zip1", "zip2"], :name => "index_addresses_on_zip1_and_zip2"
 
   create_table "gamen", :force => true do |t|
     t.string   "title"
