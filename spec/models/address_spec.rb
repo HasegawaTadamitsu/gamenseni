@@ -114,4 +114,50 @@ describe 'address 正常系' do
     end
   end
 
+  context "to_client_from_zip" do
+    before do
+      adrs = Address.new
+      @ret = adrs.to_client_from_zip '387','9999'
+    end
+    it "result is not nil" do
+      @ret.nil?.should  be_false
+    end
+  end
+
+  context "to_client_from_zip a nil " do
+    before do
+      adrs = Address.new
+      @ret = adrs.to_client_from_zip nil,nil
+    end
+    it "result is not nil" do
+      @ret.nil?.should  be_false
+    end
+  end
+
+  context "common address is" do
+    it " nil arg is not nil" do
+      adrs = Address.new
+      adrs.send(:common_address, nil).nil?.should  be_false
+    end
+    it " nill arg is not nil" do
+      adrs = Address.new
+      datas =Address.find(:all,:conditions=>["ken_code = ?",'01'])
+      adrs.send(:common_address, datas).nil?.should  be_false
+    end
+    it " nill arg is not nil" do
+      adrs = Address.new
+      datas =Address.find(:all,
+       :conditions=>["ken_code = ? and sikugun_code = ?",'01','001'])
+      adrs.send(:common_address, datas).nil?.should  be_false
+    end
+    it " nill arg is not nil" do
+      adrs = Address.new
+      datas =Address.find(:all,
+       :conditions=>["ken_code = ? and sikugun_code = ? and machi_code = ?",
+        '01','001','001'])
+      adrs.send(:common_address, datas).nil?.should  be_false
+    end
+
+  end
+
 end

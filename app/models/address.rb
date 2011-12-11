@@ -103,25 +103,62 @@ class Address < ActiveRecord::Base
 
   def to_client_zip selecter_id,ken,sikugun,machi
    result = find_by_code  ken,sikugun,machi
+   if result.nil? 
+     ret = Hash.new
+     ret[:zip1] = ""
+     ret[:zip2] = ""
+     return ret
+   end
    ret = Hash.new
-   ret[:zip1] = result[:zip][0...3]
-   ret[:zip2] = result[:zip][3...7]
+   ret[:zip1] = result[:zip1]
+   ret[:zip2] = result[:zip2]
    return ret
   end
 
   def to_client_from_zip zip1,zip2
-   result = find_by_zip zip1,zip2
-   ret = Hash.new
-   ret[:ken_code] = result[:ken_code] if !result.nil?
-   ret[:ken_hash] = ken_hash
-   ret[:sikugun_code] = result[:sikugun_code]
-   ret[:sikugun_hash] = sikugun_hash result[:ken_code]
-   ret[:machi_code] = result[:machi_code]
-   ret[:machi_hash] = machi_hash result[:ken_code],result[:sikugun_code]
-   return ret
+    result = find_by_zip zip1,zip2
+    codes = common_address result
+    ret = Hash.new
+    ret[:ken_code] = codes[:ken_code] if codes[:ken_code].nil?
+    ret[:ken_hash] = ken_hash
+    ret[:sikugun_code] = codes[:sikugn_code] if codes[:sikugn_code]
+    ret[:sikugun_hash] = sikugun_hash codes[:ken_code]
+    ret[:machi_code] = codes[:machi_code] if codes[:machi_code]
+    ret[:machi_hash] = machi_hash codes[:ken_code],codes[:sikugun_code]
+    rturn ret
   end
 
   private
+  def common_address datas
+    return {:ken_code => nil,:sikugn_code => nil,
+            :machi_code => nil} if datas.nil?
+    ken_code = nil
+    sikugn_code = nil
+    machi_code = nil
+    datas.each do |data|
+      ke = data[:ken_code]
+      if ken_code.nil?
+        ken_code = ke
+      elsif ken_code != ke
+        break
+      end
+      si = data[:sikugun_code]
+      if sikugn_code.nil?
+        sikugn_code = si
+      elsif sikugn_code != si
+        break
+      end
+      ma = data[:machi_code]
+      if machi_code.nil?
+        machi_code = si
+      elsif machi_code != si
+        break
+      end
+    end
+    return {:ken_code => ken_code,:sikugn_code => sikugun_code,
+            :machi_code => machi_code}
+  end
+
   def zero_padding string,length
     str = string.to_s
     len = length.to_i
