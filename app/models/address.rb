@@ -119,13 +119,13 @@ class Address < ActiveRecord::Base
     result = find_by_zip zip1,zip2
     codes = common_address result
     ret = Hash.new
-    ret[:ken_code] = codes[:ken_code] if codes[:ken_code].nil?
+    ret[:ken_code] = codes[:ken_code] if !codes[:ken_code].nil?
     ret[:ken_hash] = ken_hash
-    ret[:sikugun_code] = codes[:sikugn_code] if codes[:sikugn_code]
+    ret[:sikugun_code] = codes[:sikugun_code] if !codes[:sikugun_code].nil?
     ret[:sikugun_hash] = sikugun_hash codes[:ken_code]
-    ret[:machi_code] = codes[:machi_code] if codes[:machi_code]
+    ret[:machi_code] = codes[:machi_code] if !codes[:machi_code].nil?
     ret[:machi_hash] = machi_hash codes[:ken_code],codes[:sikugun_code]
-    rturn ret
+    return ret
   end
 
   private
@@ -133,29 +133,40 @@ class Address < ActiveRecord::Base
     return {:ken_code => nil,:sikugn_code => nil,
             :machi_code => nil} if datas.nil?
     ken_code = nil
-    sikugn_code = nil
+    sikugun_code = nil
     machi_code = nil
     datas.each do |data|
       ke = data[:ken_code]
       if ken_code.nil?
         ken_code = ke
       elsif ken_code != ke
-        break
-      end
-      si = data[:sikugun_code]
-      if sikugn_code.nil?
-        sikugn_code = si
-      elsif sikugn_code != si
-        break
-      end
-      ma = data[:machi_code]
-      if machi_code.nil?
-        machi_code = si
-      elsif machi_code != si
+        ken_code = nil
         break
       end
     end
-    return {:ken_code => ken_code,:sikugn_code => sikugun_code,
+    if ! ken_code.nil?
+      datas.each do |data|
+        siku = data[:sikugun_code]
+        if sikugun_code.nil?
+          sikugun_code = siku
+        elsif sikugun_code != siku
+          sikugun_code = nil
+          break
+        end
+      end
+    end
+    if ! sikugun_code.nil?
+      datas.each do |data|
+        ma = data[:machi_code]
+        if machi_code.nil?
+          machi_code = ma
+        elsif machi_code != ma
+          machi_code = nil
+          break
+        end
+      end
+    end
+    return {:ken_code => ken_code,:sikugun_code => sikugun_code,
             :machi_code => machi_code}
   end
 

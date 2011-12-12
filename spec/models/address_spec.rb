@@ -139,25 +139,33 @@ describe 'address 正常系' do
       adrs = Address.new
       adrs.send(:common_address, nil).nil?.should  be_false
     end
-    it " nill arg is not nil" do
+    it " common ken other is nil." do
       adrs = Address.new
       datas =Address.find(:all,:conditions=>["ken_code = ?",'01'])
-      adrs.send(:common_address, datas).nil?.should  be_false
+      ret=adrs.send(:common_address, datas)
+      ret[:ken_code].to_i.should  == 1
+      ret[:sikugun_code].nil?.should  be_true
+      ret[:machi_code].nil?.should  be_true
     end
-    it " nill arg is not nil" do
+    it " common ken,sikugun other is nil." do
       adrs = Address.new
-      datas =Address.find(:all,
-       :conditions=>["ken_code = ? and sikugun_code = ?",'01','001'])
-      adrs.send(:common_address, datas).nil?.should  be_false
-    end
-    it " nill arg is not nil" do
-      adrs = Address.new
-      datas =Address.find(:all,
-       :conditions=>["ken_code = ? and sikugun_code = ? and machi_code = ?",
-        '01','001','001'])
-      adrs.send(:common_address, datas).nil?.should  be_false
+      datas =Address.find(:all,:conditions=>[
+                        "ken_code = ? and sikugun_code=?",'01','001'])
+      ret=adrs.send(:common_address, datas)
+      ret[:ken_code].to_i.should  == 1
+      ret[:sikugun_code].to_i.should  == 1
+      ret[:machi_code].nil?.should  be_true
     end
 
+    it " common all." do
+      adrs = Address.new
+      datas =Address.find(:all,:conditions=>[
+          "ken_code = ? and sikugun_code=? and machi_code = ?",
+                                             '01','001','001'])
+      ret=adrs.send(:common_address, datas)
+      ret[:ken_code].to_i.should  == 1
+      ret[:sikugun_code].to_i.should  == 1
+      ret[:machi_code].to_i.should  == 1
+    end
   end
-
 end
