@@ -116,8 +116,13 @@ class Address < ActiveRecord::Base
   end
 
   def to_client_from_zip zip1,zip2
+    raise GamenSeniError.new "zip1 over length.#{zip1}" \
+        if zip1.nil? 
+
     result = find_by_zip zip1,zip2
     codes = common_address result
+
+
     ret = Hash.new
     ret[:ken_code] = codes[:ken_code] if !codes[:ken_code].nil?
     ret[:ken_hash] = ken_hash

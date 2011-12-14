@@ -6,7 +6,7 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env) if defined?(Bundler)
 
-require './lib/abstract_adapter_patch'
+#require 'lib/abstract_adapter_patch'
 
 module Gamenseni
   class Application < Rails::Application
