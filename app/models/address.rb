@@ -76,15 +76,6 @@ class Address < ActiveRecord::Base
     ret = data.first
   end
 
-  def find_by_zip zip1,zip2
-    return nil if zip1.nil?
-    return nil if zip2.nil?
-    data = Address.find(:all,
-      :conditions =>
-         ["zip1 = ? and zip2 = ?", zip1.to_s ,zip2.to_s ])
-    return nil if data.nil? || data.size == 0
-    ret = data
-  end
 
   def to_client_data selecter_id,ken,sikugun,machi
    ret= Hash.new
@@ -118,8 +109,11 @@ class Address < ActiveRecord::Base
     raise  ParameterError.new("zip is nil.","zip1 or zip2","nil") \
         if zip1.nil? or zip2.nil?
     length = zip1.length + zip2.length 
-    raise  ParameterError.new("over length.","zip1+zip2",length.to_s) \
-        if length > 7
+    raise  ParameterError.new("number igai.","zip1",zip1) \
+          if /^[0-9]{3}$/ !~ zip1
+    raise  ParameterError.new("number igai.","zip2",zip2) \
+            if /^[0-9]{2,4}$/ !~ zip2
+
 
     result = find_by_zip zip1,zip2
     codes = common_address result
@@ -182,6 +176,15 @@ class Address < ActiveRecord::Base
     len = length.to_i
     zeros = "0" * len
     return (zeros + str)[- len..-1]
+  end
+
+  def find_by_zip zip1,zip2
+    return nil if zip1.nil? || zip2.nil?
+    data = Address.find(:all,
+      :conditions =>
+         ["zip1 = ? and zip2 like ?", zip1.to_s ,zip2.to_s + "%" ])
+    return nil if data.nil? || data.size == 0
+    ret = data
   end
 
 end

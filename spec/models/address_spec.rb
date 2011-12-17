@@ -4,89 +4,60 @@ require 'spec_helper'
 
 describe 'address 正常系' do
   context "get ken data" do
-    before do
-      adrs = Address.new
-      @ken_hash = adrs.ken_hash
-    end
     it "ken_hash count 47" do
-      @ken_hash.count.should == 47
+      adrs = Address.new
+      ken_hash = adrs.ken_hash
+      ken_hash.count.should == 47
     end
   end
 
   context "get sikugun data" do
-    before do
+    it "sikugun_hash count not 0" do
       adrs = Address.new
-      @hash = adrs.sikugun_hash 1
+      hash = adrs.sikugun_hash 1
+      hash.count.should_not == 0
     end
     it "sikugun_hash count not 0" do
-      @hash.count.should_not == 0
-    end
-  end
-  context "get sikugun data from string" do
-    before do
       adrs = Address.new
-      @hash = adrs.sikugun_hash "1"
-    end
-    it "sikugun_hash count not 0" do
-      @hash.count.should_not == 0
+      hash = adrs.sikugun_hash "1"
+      hash.count.should_not == 0
     end
   end
 
   context "get machi data" do
-    before do
-      adrs = Address.new
-      @hash = adrs.machi_hash  1, 2
-    end
     it "hash count not 0" do
-      @hash.count.should_not == 0
+      adrs = Address.new
+      hash = adrs.machi_hash  1, 2
+      hash.count.should_not == 0
     end
   end
 
   context "get by code" do
-    before do
-      adrs = Address.new
-      @ret = adrs.find_by_code 99,99,99
-    end
     it "result is  nil" do
-      @ret.nil?.should be_true
-    end
-  end
-  context "get by code" do
-    before do
       adrs = Address.new
-      @ret = adrs.find_by_code 1,1,1
+      ret = adrs.find_by_code 99,99,99
+      ret.nil?.should be_true
     end
     it "result is not nil" do
-      @ret.nil?.should be_false
-    end
-  end
-  context "get not by code" do
-    before do
       adrs = Address.new
-      @ret = adrs.find_by_code 0,1,1
+      ret = adrs.find_by_code 1,1,1
+      ret.nil?.should be_false
     end
     it "result is nil" do
-      @ret.nil?.should  be_true
+      adrs = Address.new
+      ret = adrs.find_by_code 0,1,1
+      ret.nil?.should  be_true
     end
   end
-
+ 
   context "get by zip" do
-    before do
+    it "result is nil" do
       adrs = Address.new
-      @ret = adrs.find_by_zip 387,'0007'
+      adrs.send(:find_by_zip, 387,'0007' ).nil?.should  be_false
     end
     it "result is nil" do
-      @ret.nil?.should  be_false
-    end
-  end
-
-  context "get not by zip" do
-    before do
       adrs = Address.new
-      @ret = adrs.find_by_zip 387,'9999'
-    end
-    it "result is nil" do
-      @ret.nil?.should  be_true
+      adrs.send(:find_by_zip, 387,'9999' ).nil?.should  be_true
     end
   end
 
