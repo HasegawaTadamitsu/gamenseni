@@ -8,7 +8,7 @@ class GamenController < ApplicationController
 
   def confirm
     para = params[:gamen]
-    raise BadParameterError.new("paramter is nill") if para.nil?
+    raise ParameterError.new("paramter is nill","para","nil") if para.nil?
 
     @gamen = Gamen.new(para)
     if not @gamen.valid?

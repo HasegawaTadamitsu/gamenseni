@@ -1,4 +1,3 @@
-
 class Address < ActiveRecord::Base
 
   attr_accessor :ken_id
@@ -116,8 +115,11 @@ class Address < ActiveRecord::Base
   end
 
   def to_client_from_zip zip1,zip2
-    raise GamenSeniError.new "zip1 over length.#{zip1}" \
-        if zip1.nil? 
+    raise  ParameterError.new("zip is nil.","zip1 or zip2","nil") \
+        if zip1.nil? or zip2.nil?
+    length = zip1.length + zip2.length 
+    raise  ParameterError.new("over length.","zip1+zip2",length.to_s) \
+        if length > 7
 
     result = find_by_zip zip1,zip2
     codes = common_address result

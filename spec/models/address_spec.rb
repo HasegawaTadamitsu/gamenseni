@@ -126,11 +126,17 @@ describe 'address 正常系' do
 
   context "to_client_from_zip a nil " do
     before do
-      adrs = Address.new
-      @ret = adrs.to_client_from_zip nil,nil
+      @adrs = Address.new
     end
-    it "result is not nil" do
-      @ret.nil?.should  be_false
+    it "result is parameter error" do
+      lambda { @adrs.to_client_from_zip nil,'9999' }.should 
+                                raise_error( ParameterError)
+      lambda { @adrs.to_client_from_zip '999',nil }.should 
+                                raise_error( ParameterError)
+      lambda { @adrs.to_client_from_zip '123456','' }.should 
+                                raise_error( ParameterError)
+      lambda { @adrs.to_client_from_zip '','12345678' }.should 
+                                raise_error( ParameterError)
     end
   end
 

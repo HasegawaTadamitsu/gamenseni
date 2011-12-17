@@ -10,7 +10,9 @@ Bundler.require(:default, Rails.env) if defined?(Bundler)
 
 module Gamenseni
   class Application < Rails::Application
-     config.time_zone = 'Tokyo'
+    config.time_zone = 'Tokyo'
+
+    config.autoload_paths += Dir["#{config.root}/lib/**/"]
 
     config.i18n.default_locale = :ja
 
