@@ -8,6 +8,7 @@ class SessionMgr
   end
 
   def get
+    raise GamenseniError.new("session is nil") if @data.nil?
     @data
   end
   

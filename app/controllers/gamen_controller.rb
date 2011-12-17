@@ -32,7 +32,7 @@ class GamenController < ApplicationController
     my_session.valid?
 
     @gamen = my_session.get
-    raise GamenseniError.new("session is nil") if @gamen.nil?
+
 
     redirect_to :action=>'complete'
   end
