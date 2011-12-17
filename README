@@ -1,22 +1,27 @@
 this is example 
  input > confirm > crate&redirect complete
 
-
-fro 'rails', '3.0.8'
+use  'rails', '3.0.8'
 
 example
-i18n
-validate
-session
-helper
- select
-ajax
- page.replace
- replace for remote_function use jquery(not use protype.js)
+ i18n
+ validate
+ session
+ helper
+  select
+ ajax
+  replace for remote_function use jquery(not use protype.js)
+ lib error
+ rspec
+ seed
 
 
+document 
+ https://www.haselab.com/
+execute example
+ http://example-address.heroku.com/
 
-http://www.haselab.com/
+
 
 
 I see this URL.(thank you...)

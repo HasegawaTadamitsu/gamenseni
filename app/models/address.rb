@@ -112,7 +112,7 @@ class Address < ActiveRecord::Base
     raise  ParameterError.new("number igai.","zip1",zip1) \
           if /^[0-9]{3}$/ !~ zip1
     raise  ParameterError.new("number igai.","zip2",zip2) \
-            if /^[0-9]{2,4}$/ !~ zip2
+            if /^[0-9]{0,4}$/ !~ zip2
 
 
     result = find_by_zip zip1,zip2
@@ -133,39 +133,50 @@ class Address < ActiveRecord::Base
   def common_address datas
     return {:ken_code => nil,:sikugn_code => nil,
             :machi_code => nil} if datas.nil?
+
     ken_code = nil
     sikugun_code = nil
     machi_code = nil
+
+    ken_complete = false
+    sikugun_complete = false
+    machi_complete = false
+
     datas.each do |data|
-      ke = data[:ken_code]
-      if ken_code.nil?
-        ken_code = ke
-      elsif ken_code != ke
-        ken_code = nil
-        break
-      end
-    end
-    if ! ken_code.nil?
-      datas.each do |data|
-        siku = data[:sikugun_code]
-        if sikugun_code.nil?
-          sikugun_code = siku
-        elsif sikugun_code != siku
+      unless ken_complete
+        ke = data[:ken_code]
+        if ken_code.nil?
+          ken_code = ke
+        elsif ken_code != ke
+          ken_code = nil
           sikugun_code = nil
+          machi_code = nil
           break
         end
       end
-    end
-    if ! sikugun_code.nil?
-      datas.each do |data|
+      unless sikugun_complete
+        si = data[:sikugun_code]
+        if sikugun_code.nil?
+          sikugun_code = si
+        elsif sikugun_code != si
+          sikugun_code = nil
+          machi_code = nil
+          sikugun_complete = true
+          machi_complete = true
+          next
+        end
+      end
+      unless machi_complete
         ma = data[:machi_code]
         if machi_code.nil?
           machi_code = ma
         elsif machi_code != ma
           machi_code = nil
-          break
+          machi_complete = true
+          next
         end
       end
+      break if ken_complete  and sikugun_complete and machi_complete
     end
     return {:ken_code => ken_code,:sikugun_code => sikugun_code,
             :machi_code => machi_code}
@@ -182,7 +193,7 @@ class Address < ActiveRecord::Base
     return nil if zip1.nil? || zip2.nil?
     data = Address.find(:all,
       :conditions =>
-         ["zip1 = ? and zip2 like ?", zip1.to_s ,zip2.to_s + "%" ])
+         ["zip1 = ? and zip2 like ?", zip1.to_s ,zip2.to_s + "%" ]  )
     return nil if data.nil? || data.size == 0
     ret = data
   end
