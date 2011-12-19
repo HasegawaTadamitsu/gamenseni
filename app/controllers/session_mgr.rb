@@ -27,4 +27,8 @@ class SessionMgr
     @my_session[:gamen] = nil
     @data  = nil
   end
+
+  def delete_sesstion
+#    Session.delete(:condition="updated_at < now() +'-30 minutes'")
+  end
 end

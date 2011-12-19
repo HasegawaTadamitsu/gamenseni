@@ -40,7 +40,9 @@ module ApplicationHelper
 
       var set_select_misentaku = function(id){
         var optionItems = new Array();
-        optionItems.push(new Option("選択してください",""));
+        var opt = new Option("選択してください","");
+        opt.label = "選択してください";
+        optionItems.push(opt);
         $("#" + id).empty();
         $("#" + id).append(optionItems);
       };
@@ -73,11 +75,11 @@ module ApplicationHelper
         var change_selecter_id = "";
         var optionItems = new Array();
         var item = new Option("選択してください","");
-        item.text= "選択してください";
+        item.label = "選択してください";
         optionItems.push(item);
         for(var key in data) { 
           var opt = new Option(data[key], key);
-          opt.text = data[key];
+          opt.label = data[key];
           if( key == default_key) {
               opt.defaultSelected = true;
           }
