@@ -7,7 +7,7 @@ class Address < ActiveRecord::Base
   attr_accessor :zip1_id,:zip2_id
   attr_accessor :search_button_id
 
-==begin 
+=begin 
  for example scope
 
   scope :ken_select,select(["ken_code","ken_kanji"])
