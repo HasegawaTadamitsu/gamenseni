@@ -7,6 +7,23 @@ class Address < ActiveRecord::Base
   attr_accessor :zip1_id,:zip2_id
   attr_accessor :search_button_id
 
+==begin 
+ for example scope
+
+  scope :ken_select,select(["ken_code","ken_kanji"])
+                    .where("sikugun_code ='001' and machi_code ='001'")
+                    .order(:ken_code)
+   
+  scope :sikugun_select, lambda{ |ken|
+        ken_code = zero_padding2(ken,2)
+        return  select(["sikugun_code","sikugun_kanji"])
+               .where("ken_code = ?", ken_code )
+               .group(:sikugun_code,:sikugun_kanji)
+               .order(:sikugun_code)
+  }
+
+=end
+
   def ken_hash
     ret = Hash.new
     data = Address.find(:all,:select =>["ken_code","ken_kanji"],

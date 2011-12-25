@@ -1,5 +1,6 @@
 class SessionMgr
   def initialize session
+    delete_invalid
     if session.nil?
       raise GamenseniError.new("bad session.")
     end
@@ -28,7 +29,8 @@ class SessionMgr
     @data  = nil
   end
 
-  def delete_sesstion
-#    Session.delete(:condition="updated_at < now() +'-30 minutes'")
+  private
+  def delete_invalid
+    Session.delete_all( "updated_at < now() +'-30 minutes'") 
   end
 end
