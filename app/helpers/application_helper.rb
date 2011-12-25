@@ -19,7 +19,7 @@ module ApplicationHelper
     )
 
     chg_select_url = url_for :action => 'chg_select'
-    chg_zip_url    = url_for :action => 'chg_zip'
+    chg_machi_url    = url_for :action => 'chg_machi'
     chg_from_zip_url    = url_for :action => 'chg_from_zip'
     ken_id = address.ken_id
     sikugun_id = address.sikugun_id
@@ -119,10 +119,10 @@ module ApplicationHelper
              }
          });
       }
-      var onSetZip = function(selecter_id) {
+      var onChangeMachi = function(selecter_id) {
          var aj = $.ajax( {
              type: "post",
-             url:  "#{chg_zip_url}",
+             url:  "#{chg_machi_url}",
              dataType: "json",
              data: send_data(selecter_id),
              beforeSend: function(){
@@ -147,7 +147,7 @@ module ApplicationHelper
                                     onChangeSelect("#{sikugun_id}");
                                } );
       $("##{machi_id}").change( function(){
-                                  onSetZip("#{machi_id}");
+                                  onChangeMachi("#{machi_id}");
                                } );
 
       var onSearch = function(ken_id,sikugun_id,machi_id){

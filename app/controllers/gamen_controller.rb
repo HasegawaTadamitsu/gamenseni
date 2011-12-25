@@ -61,7 +61,7 @@ class GamenController < ApplicationController
     render :json => ajax
   end
 
-  def chg_zip
+  def chg_machi
     selecter =params[:selecter]
     ken     = params[:ken]
     sikugun = params[:sikugun]
